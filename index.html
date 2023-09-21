@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>opacity window </title>
+ <meta name="viewport" content="width=device-width, initial-scale=
+1" />
+<style>*{margin:0px;}
+.window{
+height:100%;
+width:100%;
+background:linear-gradient(cyan 30% , magenta 75%);
+position:fixed;
+}
+.outter{
+height:350px;
+width:540px;
+background:linear-gradient(cyan 30% , magenta 75%);
+position:fixed;
+border:2.5px solid white;
+border-radius:5px;
+margin:7px;
+}
+.main {
+height:200px;
+width:350px;
+background:rgba(255,255,255,0.4);
+margin-top:-240px;
+margin-left:20px;
+border-radius:5px;
+position:fixed;
+box-shadow:3px 3px 7px black
+}
+p{
+color: navy;
+margin:20px 10px 10px 30px;
+}
+.img,.play,.vdo1{
+color:rgba(0,0,0,0);
+}
+.img::file-selector-button{
+background:rgba(255,255,255,0.45);
+border:1px solid transparent;
+height:30px;
+border-radius:3px;
+margin:20px 0px 0px 25px;
+}
+.play::file-selector-button{
+background:rgba(255,255,255,0.45);
+border:1px solid transparent;
+height:30px;
+border-radius:3px;
+margin-left:0px;
+margin-top:0px
+}
+.photo{
+height:200px;
+width:350px;
+ }
+.aud{
+width:240px;
+height:30px;
+background:white;
+transform:scale(0.6);
+border-radius:4px;
+margin-left:-80px ;
+margin-top:-30px;
+position: absolute;
+}
+.sp{
+margin-left:380px;
+height:150px;
+width:150px;
+margin-top:30px;
+}
+.s1,.s2,.s3,.s4,.s5,.s6{
+height:30px;
+width:30px;
+background-image: repeating-radial-gradient(black 10%,
+red 20%,navy 30%,green 40%,springgreen 50%);
+float:left;
+margin:10px;
+border-radius:15px;
+}
+#id,#id1,#id2,#id3,#id4,#id5{
+animation:boom 0.71s linear infinite normal;
+ animation-play-state:paused;
+}
+.s2,.s5{
+transform:scale(0.83);
+}
+.s3,.s6{
+transform:scale(0.68);
+}
+@keyframes boom{
+25%{background-image: repeating-radial-gradient(springgreen 10%,
+black 20%,red 30%,navy 40%,black 50%); }
+50%{background-image: repeating-radial-gradient(green 10%,
+navy 20%,springgreen 30%,black 40%,red 50%); }
+75%{background-image: repeating-radial-gradient(navy 10%,
+springgreen 20%,black 30%,red 40%,green 50%); }
+100%{background-image: repeating-radial-gradient(purple 10%,
+navy 20%,maroon 30%,springgreen 40%,black 50%); }
+  }
+.btn1{
+margin-left:440px;
+margin-top:60px;
+background:rgba(255,255,255,0.45);
+border:1px solid transparent;
+height:30px;
+border-radius:3px;
+}
+.outter1{
+margin-top:-330px;
+margin-left:45px;
+}
+.videobutton{
+margin-top:310px;
+}
+#vbtn::file-selector-button{
+background:rgba(255,255,255,0.45);
+border:1px solid transparent;
+height:30px;
+border-radius:3px;
+margin-top:-30px
+}
+#lbl{
+background:rgba(255,255,255,0.45);
+border:1px solid transparent;
+height:30px;
+width:85px;
+border-radius:3px;
+margin-left:40px;
+margin-top:-35px;
+display:none;
+line-height:30px;
+padding:1px 5px 1px 5px;
+}
+#video{
+height:280px;
+width:100%;
+}
+
+</style>
+
+</head>
+<body> <div class="window">
+<div class="outter"> <div class="sp" id="sp">
+<div class="s1" id="id"> </div>
+<div class="s2" id="id1"> </div>
+<div class="s3" id="id2"> </div>
+<div class="s4" id="id3"> </div>
+<div class="s5" id="id4"> </div>
+<div class="s6" id="id5"> </div>
+</div>
+<button id="btn" class="btn1" onclick="videomode()">Video Mode
+</button>
+<label for="vbtn"  id="lbl" >choose file
+</label>
+<input type="file" id="vbtn" accept="/video/*" class="vdo1" 
+ onchange="getvideo(event)" style="display:none" >
+<div class="main" id="main"> <img src=" " class="photo" 
+accept="/image/*" id="photo" > 
+<video src=" " id="video" class="vdo" style="display:none"
+ controls> </video>
+
+</div>
+
+<input type="file" id="image" accept="/image/*" class="img" 
+ onchange="getimage(event)" >
+
+<audio src=" " class="aud" id="audio" controls> </audio>
+<input type="file" id="audio1" accept="/audio/*" class="play" 
+ onchange="getaudio(event)" >
+</div> </div>
+
+<script>
+ var image=document.getElementById("photo");
+     image.style.display="none";
+function getimage(event){
+var pic=URL.createObjectURL(event.target.files[0]);
+    image.src=pic;
+    image.style.display="block";
+    }
+function getvideo(event){
+var stream=document.getElementById("video");
+var video=URL.createObjectURL(event.target.files[0]);
+    stream.src=video;
+    stream.style.display="block";
+    }
+ function getaudio(event){
+var audio=document.getElementById("audio");
+var song=URL.createObjectURL(event.target.files[0]);
+    audio.src=song;
+document.getElementById("id").style.animationPlayState="running";
+document.getElementById("id1").style.animationPlayState="running";
+document.getElementById("id2").style.animationPlayState="running";
+document.getElementById("id3").style.animationPlayState="running";
+document.getElementById("id4").style.animationPlayState="running";
+document.getElementById("id5").style.animationPlayState="running";  
+   }
+var value="Video Mode";
+function videomode(){
+ if( value=="Video Mode") {
+    value="Normal Mode"
+var video=document.getElementById("video");
+//var image=document.getElementById("photo");
+var i_btn=document.getElementById("image");
+var a_btn=document.getElementById("audio1");
+var a_bar=document.getElementById("audio");
+var screen=document.getElementById("main");
+var speakers=document.getElementById("sp");
+var v_btn=document.getElementById("btn");
+var vdobtn=document.getElementById("vbtn");
+var label=document.getElementById("lbl");
+// document.getElementById("p").style.display="none";
+ label.style.display="block";
+ image.style.display="none";
+ speakers.style.display="none";
+ screen.style.height="280px";
+ screen.classList.add("outter1");
+ v_btn.classList.add("videobutton");
+ screen.style.width="450px";
+ a_bar.style.display="none";
+ i_btn.style.display="none";
+ a_btn.style.display="none";
+ v_btn.innerHTML="Normal Mode";
+     }
+ else{
+    value="Video Mode"
+var video=document.getElementById("video");
+//var image=document.getElementById("photo");
+var i_btn=document.getElementById("image");
+var a_btn=document.getElementById("audio1");
+var a_bar=document.getElementById("audio");
+var screen=document.getElementById("main");
+var speakers=document.getElementById("sp");
+var v_btn=document.getElementById("btn");
+var vdobtn=document.getElementById("vbtn");
+var label=document.getElementById("lbl");
+ video.style.display="none";
+ label.style.display="none";
+ image.style.display="none";
+ speakers.style.display="block";
+ screen.style.height="200px";
+ screen.classList.remove("outter1");
+ v_btn.classList.remove("videobutton");
+ screen.style.width="350px";
+ a_bar.style.display="inline";
+ i_btn.style.display="inline";
+ a_btn.style.display="inline";
+ v_btn.innerHTML="Video Mode";
+  }
+    } 
+
+
+</script>
+
+</body>
+</html>
